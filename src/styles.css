@@ -1,0 +1,632 @@
+/* === Nura Panel ABM - estilos unificados === */
+
+:root {
+  --teal: #35b9b5;
+  --purple: #6a2677;
+  --purple-dark: #4a1454;
+  --plum: #633266;
+  --bg: #f6f9fc;
+  --white: #fff;
+  --gray: #6b7280;
+  --gray-light: #e5e7eb;
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  --radius: 12px;
+}
+
+/* ---------- BASE ---------- */
+* {
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: #1f2937;
+}
+
+h1,
+h2,
+h3 {
+  color: #1f1f1f;
+  margin-bottom: 0.6em;
+}
+
+button {
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+/* ---------- LAYOUT PANEL ---------- */
+
+.app-shell {
+  padding: 40px 0 80px;
+}
+
+.panel-page {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 1100px;
+  margin: 32px auto 48px;
+  padding: 40px 50px;
+}
+
+/* ---------- TEXTOS ---------- */
+
+.page-title {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.page-intro {
+  color: var(--gray);
+  font-size: 15px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.page-steps,
+.panel-steps {
+  color: var(--gray);
+  font-size: 14px;
+  padding-left: 18px;
+  margin-bottom: 30px;
+}
+
+/* ---------- FORMULARIOS ADMIN ---------- */
+
+.admin-form {
+  background: #fafafa;
+  border-radius: var(--radius);
+  padding: 20px 25px 30px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03);
+  margin-bottom: 40px;
+}
+
+.form-title {
+  font-size: 18px;
+  color: var(--purple-dark);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.input,
+.textarea,
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-light);
+  font-size: 14px;
+}
+
+.input:focus,
+.textarea:focus,
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+  outline: 2px solid var(--teal);
+  border-color: transparent;
+}
+
+.textarea,
+.admin-form textarea {
+  resize: vertical;
+  margin-top: 10px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* ---------- BOTONES PASTILLA ESTÁNDAR ---------- */
+
+.btn,
+.btn-primary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 18px;           /* tamaño cómodo en desktop y mobile */
+  border-radius: 999px;
+  background-color: #ffffff;
+  border: 2px solid var(--plum);
+  color: var(--plum);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.1s ease;
+}
+
+/* Hover genérico */
+.btn:hover,
+.btn-primary:hover,
+.btn-ghost:hover {
+  background-color: var(--plum);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(99, 50, 102, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Variantes específicas que sobrescriben lo anterior */
+
+/* Botón morado sólido (Login, confirmar, etc.) */
+.btn.plum {
+  background: #5a2d5c;
+  color: #fff;
+  border-radius: 999px;
+  border: none;
+  padding: 6px 18px;
+}
+
+.btn.plum:hover {
+  background: #732d73;
+}
+
+/* Botón contorno morado (Cancelar modales, etc.) */
+.btn.outline-plum {
+  background: #fff;
+  color: #5a2d5c;
+  border: 2px solid #5a2d5c;
+  border-radius: 999px;
+  padding: 6px 18px;
+}
+
+.btn.outline-plum:hover {
+  background: #f8f0f8;
+}
+
+/* Botón de filtros "Buscar" (clase .btn primary) */
+.btn.primary {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: var(--white);
+}
+
+.btn.primary:hover {
+  background: var(--purple-dark);
+}
+
+/* Botón conectar en las cards */
+.btn.connect {
+  background: var(--teal);
+  color: #fff;
+  border: none;
+}
+
+.btn.connect:hover {
+  filter: brightness(0.95);
+}
+
+/* ---------- LISTADO HEADER ---------- */
+
+.listado-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.listado-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.muted {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* ---------- GRID TARJETAS ---------- */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* ---------- DIALOG / MODALES (HTML <dialog> y overlays React) ---------- */
+
+dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+}
+
+.dialog-body {
+  padding: 24px;
+}
+
+.dialog-title {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+
+
+
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid var(--plum);
+  margin-right: 6px;
+  text-decoration: none !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: all 0.15s ease;
+}
+
+.icon-btn i {
+  color: var(--plum);
+  font-size: 1.2rem;
+}
+
+.icon-btn:hover {
+  background: var(--plum);
+  transform: translateY(-1px);
+}
+
+.icon-btn:hover i {
+  color: #fff;
+}
+
+
+/* Overlays tipo modal usados en React (logout, confirm, success) */
+
+.logout-modal-backdrop,
+.modal-overlay,
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.logout-modal,
+.modal-container,
+.modal-card {
+  background: #ffffff;
+  color: #222;
+  padding: 24px 28px;
+  border-radius: 20px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.logout-modal h3,
+.modal-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.logout-modal p,
+.modal-message {
+  margin: 0 0 18px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.logout-modal-actions,
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Botones específicos de algunos modales */
+.btn.btn-secondary {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.btn.btn-danger {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+/* ---------- TARJETAS (cards) ---------- */
+
+.card {
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+.card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #222;
+  margin: 0 0 4px;
+}
+
+.card-sub {
+  font-size: 13px;
+  color: var(--gray);
+  margin: 2px 0;
+}
+
+.card-bio,
+.bio {
+  font-size: 14px;
+  color: #4b5563;
+  margin: 4px 0 0;
+}
+
+/* Chips (tipo, modalidad, cobertura) */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.chip {
+  background: #f2f2f6;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+}
+
+/* Iconos de email / whatsapp */
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid #633266;
+  margin-right: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: all 0.15s ease;
+   text-decoration: none !important;
+}
+
+.icon-btn .icon {
+  width: 20px;
+  height: 20px;
+  fill: var(--plum);
+}
+
+.icon-btn:hover {
+  background: var(--plum);
+  transform: translateY(-1px);
+}
+
+.icon-btn:hover .icon {
+  fill: #fff;
+}
+
+/* Botones Editar / Borrar tipo small-actions */
+
+.small-actions,
+.card-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn-edit,
+.btn-delete {
+  background: transparent;
+  border: 2px solid #50bdbd;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Editar */
+.btn-edit {
+  color: #000;
+}
+
+.btn-edit:hover {
+  background: #85b5e046;
+  border-color: #85b6e0;
+  transform: translateY(-2px);
+}
+
+/* Borrar */
+.btn-delete {
+  color: #f80505;
+}
+
+.btn-delete:hover {
+  background: #ff1c1c20;
+  border-color: #c20808;
+  transform: translateY(-2px);
+}
+
+/* ---------- API BOX ---------- */
+
+.api-box {
+  margin-top: 32px;
+  background: #ffffff;
+  padding: 16px 18px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.api-box pre {
+  max-height: 260px;
+  overflow: auto;
+  background: #f9fafb;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  margin: 0;
+}
+
+/* ---------- LOGIN ---------- */
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  padding: 80px 16px 40px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  padding: 32px 28px 24px;
+  border-radius: 18px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.06);
+}
+
+.login-card h2 {
+  margin: 0 0 8px;
+}
+
+.login-intro {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-bottom: 12px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.login-form input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.login-form input:focus {
+  outline: 2px solid var(--teal);
+  border-color: transparent;
+}
+
+.login-error {
+  color: #d11;
+  font-size: 0.9rem;
+}
+
+.login-hint {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* ---------- UTILIDADES ---------- */
+
+.no-results {
+  padding: 16px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 1024px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .panel-page {
+    padding: 20px;
+    margin: 16px;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}

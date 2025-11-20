@@ -1,0 +1,138 @@
+/* ====== THEME NURA (frontend) ====== */
+:root{
+  --purple:#633266;
+  --blue:#83e90e;
+  --sky:#b0e0f9;
+  --teal:#50bdbd;
+  --text:#1d1d1f;
+  --muted:#6b7280;
+  --bg:#ffffff;
+  --white:#fff;
+  --radius:16px;
+
+  /* extras UI */
+  --plum:#633266;
+  --green:#633266;
+  --sky-2:#c42145;
+  --ink:#1f2a37;
+}
+
+/* base */
+*{ box-sizing:border-box; }
+html,body{
+  margin:0; padding:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  color:var(--text); background:var(--bg);
+}
+
+/* contenedor */
+.wrap{ width:min(1100px,92%); margin-inline:auto; }
+
+/* ===== HEADER / TOPBAR ===== */
+.topbar{
+  background-color: var(--teal);
+  color:var(--white);
+  padding:20px 0 22px;
+  box-shadow:0 2px 10px rgba(0,0,0,.06);
+}
+.topbar .wrap{ display:flex; flex-direction:column; gap:12px; }
+.brand{ display:flex; align-items:center; gap:14px; }
+.logo{ background:var(--purple); color:#fff; font-weight:700; padding:8px 12px; border-radius:999px; }
+.brand h1{ font-size:clamp(18px,3vw,24px); margin:0; }
+
+.topbar-actions{
+  display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+}
+.topbar-actions a{
+  color:#fff; text-decoration:none; opacity:.95;
+}
+.topbar-actions a:hover{ opacity:1; text-decoration:underline; }
+
+/* botones */
+.btn{
+  padding:10px 14px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.4);
+  background:rgba(255,255,255,.92);
+  cursor:pointer; font-weight:600;
+}
+.btn:hover{ filter:brightness(.97); }
+.btn.primary{ background:var(--purple); color:#fff; border-color:transparent; }
+.btn.ghost{ background:#fff; border:1px solid #e5e7eb; }
+.btn.block{ width:100%; }
+
+/* main */
+main{ padding:26px 0 40px; }
+h1{ font-size: clamp(28px,4.5vw,48px); margin: 8px 0 18px; color:#0b2447; }
+
+/* inputs / forms */
+input, select, textarea{
+  border:1px solid #e5e7eb; border-radius:12px; padding:10px; background:#fff; width:100%;
+  font-size:15px;
+}
+.form{ display:grid; gap:10px; max-width: 480px; }
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.form-row .full{ grid-column:1 / -1; }
+
+/* listado */
+.list{ margin-top:20px; padding-left:18px; }
+.item{ margin:10px 0; }
+
+/* helpers */
+.muted{ color:var(--muted); }
+
+/* chips, badges */
+.chips{ display:flex; gap:6px; flex-wrap:wrap; }
+.chip{
+  display:inline-flex; align-items:center;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  padding:4px 10px; border-radius:999px; font-size:12px;
+}
+
+/* dialog UI reutilizable */
+.dlg::backdrop { background: rgba(0,0,0,.45); }
+.dlg { border: 0; border-radius: 16px; padding: 0; max-width: 420px; width: 100%; }
+.dlg-body { padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; }
+.dlg-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:10px; }
+
+/* botones edición / borrado (por si los usás) */
+.btn-edit, .btn-delete {
+  background: transparent;
+  border: 2px solid #50BDBD;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-edit { color: #000; }
+.btn-edit:hover { background: #85b5e046; border-color: #85b6e0; transform: translateY(-2px); }
+.btn-delete { color: #000; }
+.btn-delete:hover { background: #ff1c1c20; border-color: #c20808; transform: translateY(-2px); }
+
+/* intro */
+.intro p { margin: 0 0 8px; }
+
+/* grid de cards del ABM */
+.admin-grid { display:grid; gap:22px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 1024px){ .admin-grid{ grid-template-columns: 1fr; } }
+
+.card {
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: 0 6px 24px rgba(99,50,102,.12);
+  background:#fff;
+}
+.card-head { display:flex; gap:12px; align-items:flex-start; }
+.avatar { width:56px; height:56px; border-radius:50%; object-fit:cover; background:#e9eef5; border:3px solid rgba(255,255,255,.8) }
+.card h3 { margin:0 0 4px; color:#470b0b; }
+.actions { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+
+/* Forzar topbar a ocupar todo el ancho de la ventana, independientemente del contenedor .wrap */
+.topbar {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
