@@ -1,5 +1,3 @@
-// src/services/apiAuth.js
-
 const BASE = "/api/auth";
 
 /**

@@ -1,7 +1,5 @@
-// src/services/api.js
 import axios from "axios";
 
-// Usa el valor del .env y, si no existe, cae a localhost:5000/api
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 const api = axios.create({
@@ -48,6 +46,10 @@ export function getEspecialistas(params = {}) {
   return api.get("/especialistas", { params });
 }
 
+export function getEspecialistaById(id) {
+  return api.get(`/especialistas/${id}`);
+}
+
 export function createEspecialista(data, token) {
   return api.post("/especialistas", data, {
     headers: { Authorization: `Bearer ${token}` },
@@ -63,6 +65,58 @@ export function updateEspecialista(id, data, token) {
 export function deleteEspecialista(id, token) {
   return api.delete(`/especialistas/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+// =================== AGENDA INTERNA ==================
+
+export function listarBloqueosAgenda(especialistaId, token, params = {}) {
+  return api.get(`/agenda/especialistas/${especialistaId}/bloqueos`, {
+    params,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+export function crearBloqueoAgenda(especialistaId, data, token) {
+  return api.post(`/agenda/especialistas/${especialistaId}/bloqueos`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+export function eliminarBloqueoAgenda(especialistaId, bloqueoId, token) {
+  return api.delete(`/agenda/especialistas/${especialistaId}/bloqueos/${bloqueoId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+export function crearTurnoManual(especialistaId, data, token) {
+  return api.post(`/agenda/especialistas/${especialistaId}/turnos-manuales`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+export function cancelarTurno(turnoId, token) {
+  return api.patch(
+    `/turnos/${turnoId}/cancelar`,
+    {},
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+}
+
+// ===================== TURNOS =====================
+
+export function getTurnosByEspecialista(especialistaId, token) {
+  return api.get(`/turnos/especialista/${especialistaId}`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+}
+
+export function getDisponibilidad(especialistaId, from, to, token) {
+  return api.get(`/turnos/disponibilidad/${especialistaId}`, {
+    params: { from, to },
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
 }
 
@@ -91,6 +145,5 @@ export function deleteUser(id, token) {
     headers: { Authorization: `Bearer ${token}` },
   });
 }
-
 
 export default api;

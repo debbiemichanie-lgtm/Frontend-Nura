@@ -27,19 +27,35 @@
   font-weight: 600;
 }
 
-@media (max-width: 768px) {
-  .schedule-row {
-    grid-template-columns: 1fr;
-  }
-}
+/* ===== TOAST / NOTICE ===== */
 
 .nura-notice {
-  margin: 14px 0 18px;
-  padding: 12px 16px;
-  border-radius: 14px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  padding: 12px 18px;
+  border-radius: 999px;
   font-weight: 600;
-  font-size: 0.95rem;
-  box-shadow: 0 8px 20px rgba(80, 189, 189, 0.12);
+  font-size: 0.92rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(6px);
+  animation: fadeSlide 0.3s ease;
+  min-width: 260px;
+  max-width: min(92vw, 640px);
+  text-align: center;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 
 .nura-notice.error {
@@ -52,4 +68,704 @@
   background: #eefcfb;
   color: #246a67;
   border: 1px solid #bde7e3;
+}
+
+/* ===== AGENDA PANEL BASE ===== */
+
+.agenda-panel {
+  margin-top: 22px;
+  background: #ffffff;
+  border: 1px solid #e4ecec;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 25px rgba(80, 189, 189, 0.08);
+}
+
+.agenda-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.agenda-title {
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #1f2937;
+}
+
+.agenda-subtitle {
+  margin: 6px 0 0;
+  color: #667085;
+  font-size: 0.96rem;
+}
+
+.agenda-close {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 12px;
+  background: #f3f6f8;
+  color: #43515c;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;              
+  align-items: center;        
+  justify-content: center;   
+  line-height: 1;
+  flex-shrink: 0;
+  transition: 0.2s ease;
+}
+
+.agenda-close:hover {
+  background: #e0f4f4;
+  color: #2c7a7b;
+}
+
+/* ===== DAYS ===== */
+
+.agenda-days {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-bottom: 22px;
+  scrollbar-width: thin;
+}
+
+.agenda-day-card {
+  min-width: 148px;
+  border: 1px solid #d9e6e8;
+  background: #f9fcfc;
+  border-radius: 16px;
+  padding: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.18s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.agenda-day-card:hover {
+  transform: translateY(-2px);
+  border-color: #50bdbd;
+  box-shadow: 0 10px 22px rgba(80, 189, 189, 0.1);
+}
+
+.agenda-day-card.active {
+  background: #50bdbd;
+  color: #fff;
+  border-color: #50bdbd;
+}
+
+.agenda-day-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  opacity: 0.95;
+}
+
+.agenda-day-short {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.agenda-day-hours {
+  font-size: 0.78rem;
+  opacity: 0.95;
+}
+
+/* ===== BODY ===== */
+
+.agenda-body {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.agenda-slots-column,
+.agenda-form-column,
+.agenda-list-column {
+  background: #f9fbfb;
+  border: 1px solid #e7eeee;
+  border-radius: 18px;
+  padding: 16px;
+  min-height: 100%;
+}
+
+.agenda-section-title {
+  margin: 0 0 14px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #243242;
+}
+
+/* ===== SLOTS ===== */
+
+.agenda-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 14px;
+}
+
+.agenda-slot {
+  position: relative;
+  border: 1px solid #d7e6e9;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px 10px;
+  cursor: pointer;
+  transition: 0.18s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-weight: 700;
+  min-height: 72px;
+}
+
+.agenda-slot:hover:not(:disabled) {
+  border-color: #50bdbd;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(80, 189, 189, 0.1);
+}
+
+.agenda-slot small {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.agenda-slot.selected {
+  background: #50bdbd;
+  color: #fff;
+  border-color: #50bdbd;
+  box-shadow: 0 12px 24px rgba(80, 189, 189, 0.22);
+  transform: translateY(-2px);
+}
+
+.agenda-slot.selected small {
+  color: #f2ffff;
+}
+
+.agenda-slot.selected::after {
+  content: "✓";
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.agenda-slot.occupied {
+  background: #f3f4f6;
+  color: #a1a1aa;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+  opacity: 0.9;
+}
+
+.agenda-slot.occupied span,
+.agenda-slot.occupied small {
+  color: #a1a1aa;
+}
+
+/* ===== FORM ===== */
+
+.agenda-summary-box {
+  background: #f2fbfb;
+  border: 1px solid #d8efef;
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  min-height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.agenda-summary-box p {
+  margin: 5px 0;
+  font-size: 0.92rem;
+}
+
+.agenda-form-column .input,
+.agenda-form-column .textarea {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.agenda-form-column .textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.agenda-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.btn-edit1,
+.btn-primary1 {
+  width: 100%;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.btn-primary1 {
+  color: #50bdbd;
+   background: #fff;
+  border: 2px solid #50bdbd;
+}
+
+.btn-edit1 {
+  color: #ffffff;
+   background: #50bdbd;
+  border: 2px solid #50bdbd;
+}
+
+.btn-edit1:hover,
+.btn-primary1:hover {
+  background: #50bdbd36;
+  color: #50bdbd;
+}
+
+.agenda-actions .btn-edit,
+.agenda-actions .btn-primary {
+  width: 100%;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.agenda-actions .btn-edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== LIST ===== */
+
+.agenda-list {
+  display: grid;
+  gap: 10px;
+}
+
+.agenda-list-item {
+  border: 1px solid #e4ecef;
+  border-radius: 14px;
+  padding: 13px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  transition: 0.18s ease;
+}
+
+.agenda-list-item:hover {
+  border-color: #cfe8e8;
+  box-shadow: 0 8px 18px rgba(80, 189, 189, 0.08);
+}
+
+.agenda-list-item p {
+  margin: 5px 0 0;
+  color: #667085;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+/* ===== MODAL ===== */
+
+.agenda-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.42);
+  backdrop-filter: blur(5px);
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.agenda-modal {
+  width: min(1380px, 98vw);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #e4ecec;
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.22);
+}
+
+.agenda-modal .agenda-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #ffffff;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+
+/* ===== BOTONES MÁS CHICOS ===== */
+
+.btn-primary,
+.btn-edit,
+.btn-danger,
+.btn-delete {
+  height: 0px;
+  padding: 0 14px;
+  font-size: 0.9rem;
+  border-radius: 999px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1200px) {
+  .agenda-modal {
+    width: min(1200px, 98vw);
+  }
+
+  .agenda-modal .agenda-body,
+  .agenda-body {
+    grid-template-columns: 1fr;
+  }
+
+  .agenda-slots-grid {
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .agenda-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .schedule-row {
+    grid-template-columns: 1fr;
+  }
+
+  .agenda-panel {
+    padding: 14px;
+  }
+
+  .agenda-modal-backdrop {
+    padding: 8px;
+  }
+
+  .agenda-modal {
+    width: 100%;
+    max-height: 94vh;
+    border-radius: 18px;
+    padding: 12px;
+  }
+
+  .agenda-title {
+    font-size: 1.1rem;
+  }
+
+  .agenda-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .agenda-day-card {
+    min-width: 110px;
+    padding: 10px;
+  }
+
+  .agenda-day-short {
+    font-size: 0.95rem;
+  }
+
+  .agenda-slots-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .agenda-slot {
+    min-height: 60px;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .agenda-form-column .input,
+  .agenda-form-column .textarea {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .agenda-actions .btn-edit,
+  .agenda-actions .btn-primary {
+    height: 36px;
+    font-size: 0.85rem;
+  }
+
+  .agenda-list-item {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .agenda-modal .agenda-header {
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+
+  .agenda-day-card {
+    min-width: 95px;
+    padding: 10px;
+  }
+
+  .agenda-slots-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .agenda-slot {
+    min-height: 55px;
+    font-size: 0.85rem;
+  }
+
+  .agenda-title {
+    font-size: 1rem;
+  }
+
+  .agenda-actions {
+    gap: 8px;
+  }
+
+  .agenda-actions .btn-edit,
+  .agenda-actions .btn-primary {
+    height: 34px;
+    font-size: 0.8rem;
+  }
+
+  .agenda-list-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nura-notice {
+    min-width: auto;
+    width: calc(100vw - 24px);
+    font-size: 0.86rem;
+    padding: 10px 14px;
+  }
+}
+
+/* ===== CONFIRM MODAL ===== */
+
+.confirm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  background: rgba(15, 23, 42, 0.34);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.confirm-modal {
+  width: min(440px, 94vw);
+  background: #fff;
+  border: 1px solid #e5ecec;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+  animation: fadeConfirm 0.2s ease;
+}
+
+@keyframes fadeConfirm {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.confirm-title {
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: #243242;
+}
+
+.confirm-message {
+  margin: 0 0 18px;
+  color: #667085;
+  font-size: 0.94rem;
+  line-height: 1.4;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.confirm-btn {
+  height: 40px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.confirm-btn.danger {
+  background: #ef4444;
+  color: #fff;
+}
+
+.confirm-btn.danger:hover {
+  background: #dc2626;
+}
+
+.btn-edit:hover,
+.btn-primary:hover {
+  background: #0ae9e970;
+  color: #50bdbd;
+  border-color: #50bdbd;
+}
+
+.btn-delete:hover {
+  background: #ef4444;
+  color: #000000;
+  border-color: #ef4444;
+}
+
+/* ===== BOTONES CARDS MÁS PROLIJOS ===== */
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.small-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.small-actions .btn-edit,
+.small-actions .btn-delete,
+.small-actions .btn-primary {
+  min-width: 70px;
+  height: 36px;
+  padding: 0 12px;
+  font-size: 0.85rem;
+  /* border-radius: 999px; */
+  white-space: nowrap;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 768px) {
+  .card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .small-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .small-actions .btn-edit,
+  .small-actions .btn-delete,
+  .small-actions .btn-primary {
+    min-width: unset;
+    height: 32px;
+    font-size: 0.84rem;
+    padding: 0 10px;
+  }
+
+  .confirm-modal {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .confirm-actions {
+    flex-direction: column;
+  }
+
+  .confirm-actions .btn-ghost,
+  .confirm-actions .confirm-btn {
+    width: 100%;
+  }
+}
+
+.confirm-actions .btn-ghost,
+.btn-primary2 {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid #d7e6e9;
+  background: #fff;
+  color: #43515c;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.confirm-actions .btn-ghost:hover, .btn-primary2:hover {
+  background: #50bdbd;
+  color: white;
+  border: 1px solid #50bdbd;
+}
+
+.btn-primary2 {
+  color: #50bdbd;
+  border: 2px solid #50bdbd;
+}
+
+.agenda-list-item .btn-delete {
+  min-width: 120px;
+  height: 36px;
+  padding: 0 12px;
+  font-size: 0.84rem;
+}
+
+@media (max-width: 480px) {
+  .agenda-list-item .btn-delete {
+    width: 100%;
+  }
+}
+.confirm-backdrop {
+  overflow-y: auto;
 }
